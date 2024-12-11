@@ -2,7 +2,7 @@ using Microsoft.OpenApi.Models;
 
 namespace Channel.Extensions;
 
-public static class SwaggerGen
+public static class SwaggerGenExtensions
 {
     public static void AddSwaggerGen(this WebApplicationBuilder builder)
     {
@@ -16,7 +16,7 @@ public static class SwaggerGen
                 {
                     Implicit = new OpenApiOAuthFlow
                     {
-                        AuthorizationUrl = new Uri(builder.Configuration["KeyCloak:AuthorizationUrl"]),
+                        AuthorizationUrl = new Uri(builder.Configuration["Authentication:BaseUrl"] + builder.Configuration["Authentication:AuthorizationUrl"]),
                         Scopes = new Dictionary<string, string>
                         {
                             { "openid", "openid" },

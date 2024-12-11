@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0.7
+    container_name: keycloak
+    command: >
+      start-dev
+      --import-realm
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    volumes:
+      - ./keycloak:/opt/keycloak/data/import
+    ports:
+      - 44377:8080
+    networks:
+      - talkie_network
+
+  channel-service:
+    build:
+      context: services/Channel
+      dockerfile: Dockerfile
+      no_cache: true
+    container_name: channel-service
+    ports:
+      - "44378:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Authentication__BaseUrl=http://keycloak:8080
+    networks:
+      - talkie_network
+    depends_on:
+      - keycloak
+
+networks:
+  talkie_network:
+    driver: bridge
