@@ -1,6 +1,17 @@
 version: '3.8'
 
 services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=1q2w3E*
+    ports:
+      - "5432:5432"
+    networks:
+      - talkie_network
+
   keycloak:
     image: quay.io/keycloak/keycloak:26.0.7
     container_name: keycloak
@@ -28,6 +39,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - Authentication__BaseUrl=http://keycloak:8080
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=ChannelsDb;Username=admin;Password=1q2w3E*
     networks:
       - talkie_network
     depends_on:
