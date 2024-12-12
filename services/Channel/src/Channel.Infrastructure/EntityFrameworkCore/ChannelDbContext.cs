@@ -1,6 +1,7 @@
+using Channel.Domain.Channels;
 using Microsoft.EntityFrameworkCore;
 
-namespace Channel.Infrastructure.Data;
+namespace Channel.Infrastructure.EntityFrameworkCore;
 
 public class ChannelDbContext : DbContext
 {
@@ -17,5 +18,7 @@ public class ChannelDbContext : DbContext
             entity.HasKey(c => c.Id);
             entity.Property(c => c.Name).IsRequired().HasMaxLength(100);
         });
+
+        // modelBuilder.Entity<UserWithRole>().HasNoKey();
     }
 }

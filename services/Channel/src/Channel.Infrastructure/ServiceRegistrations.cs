@@ -1,4 +1,4 @@
-using Channel.Infrastructure.Data;
+using Channel.Infrastructure.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

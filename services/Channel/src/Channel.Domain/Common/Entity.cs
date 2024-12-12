@@ -1,8 +1,6 @@
-using System.Data.Common;
+namespace Channel.Domain.Common;
 
-namespace Channel.Domain;
-
-public class Entity<T>
+public class Entity<T> : IEntity<T>
 {
     public T Id { get; set; }
     public DateTime CreatedAt { get; set; }

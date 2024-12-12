@@ -7,17 +7,19 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Channel.csproj", "./"]
-RUN dotnet restore "Channel.csproj"
+COPY ["Channel.Api/Channel.Api.csproj", "Channel.Api/"]
+COPY ["../Channel.Domain/Channel.Domain.csproj", "Channel.Domain/"]
+COPY ["../Channel.Infrastructure/Channel.Infrastructure.csproj", "Channel.Infrastructure/"]
+RUN dotnet restore "Channel.Api/Channel.Api.csproj"
 COPY . .
-WORKDIR "/src/"
-RUN dotnet build "Channel.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/Channel.Api"
+RUN dotnet build "Channel.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "Channel.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Channel.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Channel.dll"]
+ENTRYPOINT ["dotnet", "Channel.Api.dll"]

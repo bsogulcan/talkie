@@ -12,6 +12,19 @@ services:
     networks:
       - talkie_network
 
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=1q2w3E*
+    ports:
+      - "5050:80"
+    networks:
+      - talkie_network
+    depends_on:
+      - postgres
+
   keycloak:
     image: quay.io/keycloak/keycloak:26.0.7
     container_name: keycloak
@@ -30,8 +43,8 @@ services:
 
   channel-service:
     build:
-      context: services/Channel
-      dockerfile: Dockerfile
+      context: services/Channel/src/
+      dockerfile: Channel.Api/Dockerfile
       no_cache: true
     container_name: channel-service
     ports:
@@ -45,7 +58,7 @@ services:
     depends_on:
       - keycloak
       - postgres
-      
+
 networks:
   talkie_network:
     driver: bridge
