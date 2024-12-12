@@ -5,6 +5,8 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <AssemblyName>Channel.Api</AssemblyName>
+        <RootNamespace>Channel.Api</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

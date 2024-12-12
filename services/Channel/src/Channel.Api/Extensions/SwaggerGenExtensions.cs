@@ -1,6 +1,6 @@
 using Microsoft.OpenApi.Models;
 
-namespace Channel.Extensions;
+namespace Channel.Api.Extensions;
 
 public static class SwaggerGenExtensions
 {

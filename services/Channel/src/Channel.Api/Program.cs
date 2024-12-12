@@ -1,4 +1,4 @@
-using Channel.Extensions;
+using Channel.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddKeycloakAuthentication();

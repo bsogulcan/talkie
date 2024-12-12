@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Channel.Extensions;
+namespace Channel.Api.Extensions;
 
 public static class KeycloakAuthenticationExtensions
 {
