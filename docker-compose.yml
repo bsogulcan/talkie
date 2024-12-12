@@ -44,7 +44,8 @@ services:
       - talkie_network
     depends_on:
       - keycloak
-
+      - postgres
+      
 networks:
   talkie_network:
     driver: bridge

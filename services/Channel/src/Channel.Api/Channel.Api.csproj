@@ -15,4 +15,9 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Channel.Domain\Channel.Domain.csproj" />
+      <ProjectReference Include="..\Channel.Infrastructure\Channel.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
